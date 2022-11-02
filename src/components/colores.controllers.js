@@ -25,29 +25,41 @@ export const crearColor = async (req, res) => {
   }
 };
 
-export const obtenerColor = async (req, res)=>{
-    try{
-        console.log(req.body)
-        const colorBuscado= await Color.findById(req.params.id)
-        res.status(201).json(colorBuscado)
-    }catch(error){
-        res.status(404).json({
-            mensaje:'Error no se encontro el color buscado'
-        })
-        console.log(error)
-    }
-}
-export const editarColor = async (req, res)=>{
-    try{
-      
-        await Color.findByIdAndUpdate(req.params.id)
-        res.status(200).json({
-            mensaje:'El color se edito satisfactoriamente'
-        })
-    }catch(error){
-        res.status(404).json({
-            mensaje:'Error no se pudo editar el color deseado'
-        })
-        console.log(error)
-    }
-}
+export const obtenerColor = async (req, res) => {
+  try {
+    console.log(req.body);
+    const colorBuscado = await Color.findById(req.params.id);
+    res.status(201).json(colorBuscado);
+  } catch (error) {
+    res.status(404).json({
+      mensaje: "Error no se encontro el color buscado",
+    });
+    console.log(error);
+  }
+};
+export const editarColor = async (req, res) => {
+  try {
+    await Color.findByIdAndUpdate(req.params.id, req.body);
+    res.status(200).json({
+      mensaje: "El color se edito satisfactoriamente",
+    });
+  } catch (error) {
+    res.status(404).json({
+      mensaje: "Error no se pudo editar el color deseado",
+    });
+    console.log(error);
+  }
+};
+export const borrarColor = async (req, res) => {
+  try {
+    await Color.findByIdAndDelete(req.params.id);
+    res.status(200).json({
+      mensaje: "El color se elimino satisfactoriamente",
+    });
+  } catch (error) {
+    res.status(404).json({
+      mensaje: "Error no se pudo borrar el color deseado",
+    });
+    console.log(error);
+  }
+};
